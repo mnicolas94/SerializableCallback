@@ -11,7 +11,7 @@ using B83;
 public abstract class SerializableStaticCallbackBase<TReturn> : SerializableStaticCallbackBase 
 { 
     public InvokableCallbackBase<TReturn> func;
-
+    
     public override void ClearCache()
     {
         base.ClearCache();
@@ -62,14 +62,17 @@ public abstract class SerializableStaticCallbackBase : ISerializationCallbackRec
     //public Type targetType { get { return Type.GetType(_targetType, true); }/* set { _targetMonoScript = value; ClearCache(); }*/ }
     public Type targetType { get { return _targetType.Type; }/* set { _targetMonoScript = value; ClearCache(); }*/ }
     /// <summary> Target method name </summary>
+    
     public string methodName { get { return _methodName; } set { _methodName = value; ClearCache(); } }
+    public bool isStatic { get => _static; }
+    //public bool isStatic { get => targetType.GetMethod(methodName).IsStatic; }
     public object[] Args { get { return args != null ? args : args = _args.Select(x => x.GetValue()).ToArray(); } }
     public object[] args;
     public Type[] ArgTypes { get { return argTypes != null ? argTypes : argTypes = _args.Select(x => Arg.RealType(x.argType)).ToArray(); } }
     public Type[] argTypes;
     public Type[] ArgRealTypes { get { return argRealTypes != null ? argRealTypes : argRealTypes = _args.Select(x => Type.GetType(x._typeName,true)).ToArray(); } }
     public Type[] argRealTypes;
-    public bool dynamic { get { return _dynamic; } set { _dynamic = value; ClearCache(); } }
+    //public bool dynamic { get { return _dynamic; } set { _dynamic = value; ClearCache(); } }
 
     //[SerializeField] protected Object _target;
 
@@ -80,6 +83,7 @@ public abstract class SerializableStaticCallbackBase : ISerializationCallbackRec
     [SerializeField] protected string _methodName;
     [SerializeField] protected Arg[] _args;
     [SerializeField] protected bool _dynamic;
+    [SerializeField] protected bool _static;
 #pragma warning disable 0414
     [SerializeField] private string _typeName;
 #pragma warning restore 0414
@@ -102,12 +106,13 @@ public abstract class SerializableStaticCallbackBase : ISerializationCallbackRec
     public void SetMethod(string methodName, bool dynamic, params Arg[] args)
     {
         _methodName = methodName;
-        _dynamic = dynamic;
+        //_dynamic = dynamic;
+        _static=targetType.GetMethod(methodName).IsStatic;
         _args = args;
         ClearCache();
     }
 
-    protected abstract void Cache();
+    protected abstract void Cache(params object[] args);
 
     public void OnBeforeSerialize()
     {

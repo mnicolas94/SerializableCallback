@@ -21,26 +21,12 @@ public class InvokableStaticCallback<TReturn> : InvokableCallbackBase<TReturn>
     /// <summary> Constructor </summary>
     public InvokableStaticCallback(Type targetType, string methodName)
     {
-        //if (targetType == null || string.IsNullOrEmpty(methodName))
-        //{
-        //    func = () => default(TReturn);
-        //}
-        //else
-        {
-            func = (System.Func<TReturn>)System.Delegate.CreateDelegate(typeof(System.Func<TReturn>), targetType, methodName);
-        }
+        func = (System.Func<TReturn>)System.Delegate.CreateDelegate(typeof(System.Func<TReturn>), targetType, methodName);
     }
 
     public InvokableStaticCallback(object target, string methodName)
     {
-        //if (target == null || string.IsNullOrEmpty(methodName))
-        //{
-        //    func = () => default(TReturn);
-        //}
-        //else
-        {
-            func = (System.Func<TReturn>)System.Delegate.CreateDelegate(typeof(System.Func<TReturn>), target, methodName);
-        }
+        func = (System.Func<TReturn>)System.Delegate.CreateDelegate(typeof(System.Func<TReturn>), target, methodName);
     }
 }
 
@@ -64,29 +50,12 @@ public class InvokableStaticCallback<T0, TReturn> : InvokableCallbackBase<TRetur
     /// <summary> Constructor </summary>
     public InvokableStaticCallback(Type targetType, string methodName)
     {
-        //if (targetType == null || string.IsNullOrEmpty(methodName))
-        //{
-        //    func = x => default(TReturn);
-        //}
-        //else
-        {
-            Debug.Log($"{targetType},{methodName}");
-            func = (System.Func<T0, TReturn>)System.Delegate.CreateDelegate(typeof(System.Func<T0, TReturn>), targetType, methodName);
-        }
+        func = (System.Func<T0, TReturn>)System.Delegate.CreateDelegate(typeof(System.Func<T0, TReturn>), targetType, methodName);
     }
 
     public InvokableStaticCallback(object target, string methodName)
     {
-        //if (target == null || string.IsNullOrEmpty(methodName))
-        //{
-        //    func = x => default(TReturn);
-        //}
-        //else
-        {
-
-            //func = (System.Func<T0,TReturn>) System.Delegate.CreateDelegate(typeof(System.Func<TReturn>), target, methodName);
-            func = (System.Func<T0,TReturn>) System.Delegate.CreateDelegate(typeof(System.Func<TReturn>), target, methodName);
-        }
+        func = (System.Func<T0,TReturn>) System.Delegate.CreateDelegate(typeof(System.Func<TReturn>), target, methodName);
     }
 
 }
@@ -112,14 +81,12 @@ public class InvokableStaticCallback<T0, T1, TReturn> : InvokableCallbackBase<TR
     /// <summary> Constructor </summary>
     public InvokableStaticCallback(Type targetType, string methodName)
     {
-        //if (targetType == null || string.IsNullOrEmpty(methodName))
-        //{
-        //    func = (x, y) => default(TReturn);
-        //}
-        //else
-        {
-            func = (System.Func<T0, T1, TReturn>)System.Delegate.CreateDelegate(typeof(System.Func<T0, T1, TReturn>), targetType, methodName);
-        }
+        func = (System.Func<T0, T1, TReturn>)System.Delegate.CreateDelegate(typeof(System.Func<T0, T1, TReturn>), targetType, methodName);
+    }
+
+    public InvokableStaticCallback(object target, string methodName)
+    {
+        func = (System.Func<T0, T1, TReturn>)System.Delegate.CreateDelegate(typeof(System.Func<T1,TReturn>), target, methodName);
     }
 }
 
@@ -145,14 +112,11 @@ public class InvokableStaticCallback<T0, T1, T2, TReturn> : InvokableCallbackBas
     /// <summary> Constructor </summary>
     public InvokableStaticCallback(Type targetType, string methodName)
     {
-        if (targetType == null || string.IsNullOrEmpty(methodName))
-        {
-            func = (x, y, z) => default(TReturn);
-        }
-        else
-        {
-            func = (System.Func<T0, T1, T2, TReturn>)System.Delegate.CreateDelegate(typeof(System.Func<T0, T1, T2, TReturn>), targetType, methodName);
-        }
+        func = (System.Func<T0, T1, T2, TReturn>)System.Delegate.CreateDelegate(typeof(System.Func<T0, T1, T2, TReturn>), targetType, methodName);
+    }
+    public InvokableStaticCallback(object target, string methodName)
+    {
+        func = (System.Func<T0, T1, T2, TReturn>)System.Delegate.CreateDelegate(typeof(System.Func<T1, T2, TReturn>), target, methodName);
     }
 }
 
@@ -179,13 +143,10 @@ public class InvokableStaticCallback<T0, T1, T2, T3, TReturn> : InvokableCallbac
     /// <summary> Constructor </summary>
     public InvokableStaticCallback(Type targetType, string methodName)
     {
-        if (targetType == null || string.IsNullOrEmpty(methodName))
-        {
-            func = (x, y, z, w) => default(TReturn);
-        }
-        else
-        {
-            func = (System.Func<T0, T1, T2, T3, TReturn>)System.Delegate.CreateDelegate(typeof(System.Func<T0, T1, T2, T3, TReturn>), targetType, methodName);
-        }
+        func = (System.Func<T0, T1, T2, T3, TReturn>)System.Delegate.CreateDelegate(typeof(System.Func<T0, T1, T2, T3, TReturn>), targetType, methodName);
+    }
+    public InvokableStaticCallback(object target, string methodName)
+    {
+        func = (System.Func<T0, T1, T2, T3, TReturn>)System.Delegate.CreateDelegate(typeof(System.Func<T1, T2, T3, TReturn>), target, methodName);
     }
 }
