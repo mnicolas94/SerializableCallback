@@ -41,7 +41,7 @@ To install this project as a dependency using the Unity Package Manager,
 add the following line to your project's `manifest.json`:
 
 ```
-"com.github.siccity.serializablecallback": "git+https://github.com/RedStudio-Organization/SerializableCallback.git"
+"com.github.siccity.serializablecallback": "git+https://github.com/mnicolas94/SerializableCallback.git"
 ```
 
 Join the [Discord](https://discord.gg/qgPrHv4 "Join Discord server") server to leave feedback or get support.
