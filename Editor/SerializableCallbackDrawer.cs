@@ -29,6 +29,7 @@ namespace SerializableCallback.Editor
 			"flow overlay box");
 #endif
             position.y += 4;
+            
             // Using BeginProperty / EndProperty on the parent property means that
             // prefab override logic works on the entire property.
             property.serializedObject.Update();
@@ -187,7 +188,7 @@ namespace SerializableCallback.Editor
 
             // Get return type and argument constraints
             SerializableCallbackBase dummy = GetDummyFunction(property);
-            Type[] genericTypes = dummy.GetType().BaseType.GetGenericArguments();
+            Type[] genericTypes = GetGenericCallbackType(dummy).GetGenericArguments();
             // SerializableEventBase is always void return type
             if (dummy is SerializableEventBase)
             {
@@ -222,17 +223,17 @@ namespace SerializableCallback.Editor
             if (targets[0] is Component component)
             {
                 targets = component.gameObject.GetComponents<Component>().ToList<Object>();
-                targets.Add((targetProp.objectReferenceValue as Component).gameObject);
+                targets.Add(component.gameObject);
             }
             else if (targets[0] is GameObject go)
             {
                 targets = go.GetComponents<Component>().ToList<Object>();
-                targets.Add(targetProp.objectReferenceValue as GameObject);
+                targets.Add(go);
             }
             for (int c = 0; c < targets.Count; c++)
             {
                 Object t = targets[c];
-                MethodInfo[] methods = targets[c].GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+                MethodInfo[] methods = t.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
 
                 for (int i = 0; i < methods.Length; i++)
                 {
@@ -306,6 +307,20 @@ namespace SerializableCallback.Editor
                 menu.AddDisabledItem(new GUIContent("No methods with return type '" + GetTypeName(returnType) + "'"));
             }
             menu.ShowAsContext();
+        }
+
+        private static Type GetGenericCallbackType(SerializableCallbackBase dummy)
+        {
+            var type = dummy.GetType();
+            var genericArgumentsCount = type.GetGenericArguments().Length;
+            if (genericArgumentsCount > 0)
+            {
+                return type;
+            }
+            else
+            {
+                return type.BaseType;
+            }
         }
 
         string PrettifyMethod(string methodName, Type[] parmTypes)
