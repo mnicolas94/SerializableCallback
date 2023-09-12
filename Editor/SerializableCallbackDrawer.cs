@@ -259,14 +259,15 @@ namespace SerializableCallback.Editor
                     {
                         continue;
                     }
+                    
                     // Skip methods with unsupported args
-                    if (parms.Any(x => !Arg.IsSupported(x)))
-                    {
-                        continue;
-                    }
+                    var nonSerializableArgTypes = parms.Any(x => !Arg.IsSupported(x));
 
-                    string methodPrettyName = PrettifyMethod(methods[i]);
-                    staticItems.Add(new MenuItem(targets[c].GetType().Name + "/" + methods[i].DeclaringType.Name, methodPrettyName, () => SetMethod(property, t, method, false)));
+                    if (!nonSerializableArgTypes)
+                    {
+                        string methodPrettyName = PrettifyMethod(methods[i]);
+                        staticItems.Add(new MenuItem(targets[c].GetType().Name + "/" + methods[i].DeclaringType.Name, methodPrettyName, () => SetMethod(property, t, method, false)));
+                    }
 
                     // Skip methods with wrong constrained args
                     if (argTypes.Length == 0 || !Enumerable.SequenceEqual(argTypes, parms))

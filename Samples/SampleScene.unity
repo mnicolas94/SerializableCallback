@@ -244,53 +244,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db62a0a9178a84d4ab15ceb34d62ed39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _floatCallback:
+  _nonValueParameter:
     _target: {fileID: 1700258548}
-    _methodName: ParamFunction
-    _args:
-    - boolValue: 0
-      intValue: 5
-      floatValue: 0
-      stringValue: 
-      objectValue: {fileID: 0}
-      argType: 2
-      _typeName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-    _dynamic: 0
-    _typeName: SerializableCallback.SerializableCallback`1[[System.Single, mscorlib,
-      Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], Siccity.SerializableCallback,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    dirty: 0
-  _parameterCallback:
-    _target: {fileID: 1700258548}
-    _methodName: ParamFunction
+    _methodName: NonValueFunction
     _args:
     - boolValue: 0
       intValue: 0
       floatValue: 0
       stringValue: 
       objectValue: {fileID: 0}
-      argType: 2
-      _typeName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+      argType: 0
+      _typeName: System.Threading.CancellationToken, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
     _dynamic: 1
-    _typeName: SerializableCallback.SerializableCallback`2[[System.Int32, mscorlib,
-      Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Single,
+    _typeName: SerializableCallback.SerializableCallback`2[[System.Threading.CancellationToken,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.String,
       mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],
       Siccity.SerializableCallback, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    dirty: 0
-  _parameterCallbackF:
-    _target: {fileID: 1700258548}
-    _methodName: ParamFunction
-    _args:
-    - boolValue: 0
-      intValue: 0
-      floatValue: 0
-      stringValue: 
-      objectValue: {fileID: 0}
-      argType: 2
-      _typeName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-    _dynamic: 1
-    _typeName: SerializableCallback.Samples.ParamCallback, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
     dirty: 0
 --- !u!4 &1700258549
 Transform:
