@@ -23,7 +23,8 @@ public class SerializableEvent : SerializableEventBase {
 	}
 }
 
-public abstract class SerializableEvent<T0> : SerializableEventBase {
+[System.Serializable]
+public class SerializableEvent<T0> : SerializableEventBase {
 	public void Invoke(T0 arg0) {
 		if (invokable == null) Cache();
 		if (_dynamic) {
@@ -47,7 +48,8 @@ public abstract class SerializableEvent<T0> : SerializableEventBase {
 	}
 }
 
-public abstract class SerializableEvent<T0, T1> : SerializableEventBase {
+[System.Serializable]
+public class SerializableEvent<T0, T1> : SerializableEventBase {
 	public void Invoke(T0 arg0, T1 arg1) {
 		if (invokable == null) Cache();
 		if (_dynamic) {
@@ -71,7 +73,8 @@ public abstract class SerializableEvent<T0, T1> : SerializableEventBase {
 	}
 }
 
-public abstract class SerializableEvent<T0, T1, T2> : SerializableEventBase {
+[System.Serializable]
+public class SerializableEvent<T0, T1, T2> : SerializableEventBase {
 	public void Invoke(T0 arg0, T1 arg1, T2 arg2) {
 		if (invokable == null) Cache();
 		if (_dynamic) {
@@ -95,7 +98,8 @@ public abstract class SerializableEvent<T0, T1, T2> : SerializableEventBase {
 	}
 }
 
-public abstract class SerializableEvent<T0, T1, T2, T3> : SerializableEventBase {
+[System.Serializable]
+public class SerializableEvent<T0, T1, T2, T3> : SerializableEventBase {
 	public void Invoke(T0 arg0, T1 arg1, T2 arg2, T3 arg3) {
 		if (invokable == null) Cache();
 		if (_dynamic) {
