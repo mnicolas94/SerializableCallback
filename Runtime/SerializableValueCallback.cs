@@ -22,6 +22,14 @@ namespace SerializableCallback
         [SerializeField] private T _value;
         [SerializeField] private SerializableCallback<T> _callback;
 
-        public T Value => _mode == Mode.Value ? _value : _callback.Invoke();
+        public T Value
+        {
+            get => _mode == Mode.Value ? _value : _callback.Invoke();
+            set
+            {
+                _mode = Mode.Value;
+                _value = value;
+            }
+        }
     }
 }
