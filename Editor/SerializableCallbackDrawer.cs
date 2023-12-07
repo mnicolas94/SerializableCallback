@@ -20,7 +20,7 @@ namespace SerializableCallback.Editor
             property.serializedObject.ApplyModifiedProperties();
 
             // Indent label
-            label.text = " " + label.text;
+            // label.text = " " + label.text;
 
 #if UNITY_2019_1_OR_NEWER
             GUI.Box(position, "");

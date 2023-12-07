@@ -14,6 +14,7 @@ namespace SerializableCallback.Samples
         [SerializeField] private SerializableCallback<int, float> _parameterCallback;
         [SerializeField] private ParamCallback _parameterCallbackInherit;
         [SerializeField] private SerializableCallback<CancellationToken, string> _nonValueParameter;
+        [SerializeField] private SerializableValueCallback<string> _valueCallback;
 
         public float FloatFunction()
         {

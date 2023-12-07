@@ -286,7 +286,7 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
     dirty: 0
   _nonValueParameter:
-    _target: {fileID: 1700258548}
+    _target: {fileID: 0}
     _methodName: NonValueFunction
     _args:
     - boolValue: 0
@@ -303,6 +303,18 @@ MonoBehaviour:
       mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],
       Siccity.SerializableCallback, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     dirty: 0
+  _valueCallback:
+    _mode: 1
+    _value: 1234
+    _callback:
+      _target: {fileID: 1700258547}
+      _methodName: get_tag
+      _args: []
+      _dynamic: 0
+      _typeName: SerializableCallback.SerializableCallback`1[[System.String, mscorlib,
+        Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], Siccity.SerializableCallback,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      dirty: 0
 --- !u!4 &1700258549
 Transform:
   m_ObjectHideFlags: 0
