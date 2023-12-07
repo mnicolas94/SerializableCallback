@@ -36,9 +36,9 @@ namespace SerializableCallback.Editor
             buttonRect.yMin += _popupStyle.margin.top;
             buttonRect.yMax = buttonRect.yMin + EditorGUIUtility.singleLineHeight;
             buttonRect.width = _popupStyle.fixedWidth + _popupStyle.margin.right;
-            buttonRect.x = position.width - buttonRect.width;
 
             position.width -= buttonRect.width;
+            buttonRect.x = position.xMax;
 
             var enumValueIndex = EditorGUI.Popup(
                 buttonRect, _modeProperty.enumValueIndex, _modeProperty.enumDisplayNames, _popupStyle);
