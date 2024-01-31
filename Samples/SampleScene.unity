@@ -315,6 +315,36 @@ MonoBehaviour:
         Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], Siccity.SerializableCallback,
         Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
       dirty: 0
+  _staticCallback:
+    _targetType:
+      m_TypeName: SerializableCallback.Samples.Test, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    _methodName: StaticFunction
+    _args: []
+    _dynamic: 0
+    _typeName: SerializableCallback.SerializableStaticCallback`1[[System.String,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],
+      Siccity.SerializableCallback, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    dirty: 0
+  _staticWithArgCallback:
+    _targetType:
+      m_TypeName: SerializableCallback.Samples.Test, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    _methodName: StaticWithArgFunction
+    _args:
+    - boolValue: 0
+      intValue: 21
+      floatValue: 0
+      stringValue: 
+      objectValue: {fileID: 0}
+      argType: 2
+      _typeName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+    _dynamic: 0
+    _typeName: SerializableCallback.SerializableStaticCallback`2[[System.Int32, mscorlib,
+      Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.String,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],
+      Siccity.SerializableCallback, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    dirty: 0
 --- !u!4 &1700258549
 Transform:
   m_ObjectHideFlags: 0

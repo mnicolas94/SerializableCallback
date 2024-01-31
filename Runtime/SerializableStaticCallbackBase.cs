@@ -25,24 +25,24 @@ namespace SerializableCallback
             switch (types.Length)
             {
                 case 1:
-                    genericType = typeof(InvokableCallback<>).MakeGenericType(types);
+                    genericType = typeof(InvokableStaticCallback<>).MakeGenericType(types);
                     break;
                 case 2:
-                    genericType = typeof(InvokableCallback<,>).MakeGenericType(types);
+                    genericType = typeof(InvokableStaticCallback<,>).MakeGenericType(types);
                     break;
                 case 3:
-                    genericType = typeof(InvokableCallback<,,>).MakeGenericType(types);
+                    genericType = typeof(InvokableStaticCallback<,,>).MakeGenericType(types);
                     break;
                 case 4:
-                    genericType = typeof(InvokableCallback<,,,>).MakeGenericType(types);
+                    genericType = typeof(InvokableStaticCallback<,,,>).MakeGenericType(types);
                     break;
                 case 5:
-                    genericType = typeof(InvokableCallback<,,,,>).MakeGenericType(types);
+                    genericType = typeof(InvokableStaticCallback<,,,,>).MakeGenericType(types);
                     break;
                 default:
                     throw new ArgumentException(types.Length + "args");
             }
-            return Activator.CreateInstance(genericType, new object[] {/*target,*/ methodName }) as InvokableCallbackBase<TReturn>;
+            return Activator.CreateInstance(genericType, new object[] { targetType, methodName }) as InvokableCallbackBase<TReturn>;
         }
     }
 
@@ -53,34 +53,23 @@ namespace SerializableCallback
     {
 
         /// <summary> Target object </summary>
-        //public Object target { get { return _target; } set { _target = value; ClearCache(); } }
-        //public Type targetType { get { return _targetType; }/* set { _targetMonoScript = value; ClearCache(); }*/ }
-        //public Type targetType { get { Debug.Log(_targetType.GetClass()); return _targetType.GetClass(); }/* set { _targetMonoScript = value; ClearCache(); }*/ }
-        //public Type targetType { get { return Type.GetType(_targetType, true); }/* set { _targetMonoScript = value; ClearCache(); }*/ }
-        public Type targetType { get { return _targetType.Type; }/* set { _targetMonoScript = value; ClearCache(); }*/ }
-        /// <summary> Target method name </summary>
+        public Type targetType { get { return _targetType.Type; } }
     
+        /// <summary> Target method name </summary>
         public string methodName { get { return _methodName; } set { _methodName = value; ClearCache(); } }
-        public bool isStatic { get => _isStatic; }
-        //public bool isStatic { get => targetType.GetMethod(methodName).IsStatic; }
         public object[] Args { get { return args != null ? args : args = _args.Select(x => x.GetValue()).ToArray(); } }
         public object[] args;
         public Type[] ArgTypes { get { return argTypes != null ? argTypes : argTypes = _args.Select(x => Arg.RealType(x.argType)).ToArray(); } }
         public Type[] argTypes;
         public Type[] ArgRealTypes { get { return argRealTypes != null ? argRealTypes : argRealTypes = _args.Select(x => Type.GetType(x._typeName,true)).ToArray(); } }
         public Type[] argRealTypes;
-        //public bool dynamic { get { return _dynamic; } set { _dynamic = value; ClearCache(); } }
+        public bool dynamic { get { return _dynamic; } set { _dynamic = value; ClearCache(); } }
 
-        //[SerializeField] protected Object _target;
 
-        //[SerializeField] protected Type _targetType;
-        //[SerializeField] protected MonoScript _targetType;//! cant be used for build. it uses unityengine. Use Type instead
-        //[SerializeField] protected string _targetType;
         [SerializeField] protected SerializableMonoScript _targetType;
         [SerializeField] protected string _methodName;
         [SerializeField] protected Arg[] _args;
-        //[SerializeField] protected bool _dynamic;
-        [SerializeField] protected bool _isStatic;
+        [SerializeField] protected bool _dynamic;
 #pragma warning disable 0414
         [SerializeField] private string _typeName;
 #pragma warning restore 0414
@@ -103,8 +92,7 @@ namespace SerializableCallback
         public void SetMethod(string methodName, bool dynamic, params Arg[] args)
         {
             _methodName = methodName;
-            //_dynamic = dynamic;
-            _isStatic=targetType.GetMethod(methodName).IsStatic;
+            _dynamic = dynamic;
             _args = args;
             ClearCache();
         }

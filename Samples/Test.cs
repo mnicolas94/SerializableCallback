@@ -16,6 +16,7 @@ namespace SerializableCallback.Samples
         [SerializeField] private SerializableCallback<CancellationToken, string> _nonValueParameter;
         [SerializeField] private SerializableValueCallback<string> _valueCallback;
         [SerializeField] private SerializableStaticCallback<string> _staticCallback;
+        [SerializeField] private SerializableStaticCallback<int, string> _staticWithArgCallback;
 
         public float FloatFunction()
         {
@@ -32,6 +33,16 @@ namespace SerializableCallback.Samples
             return $"ct: {ct.ToString()}";
         }
 
+        public static string StaticFunction()
+        {
+            return "this is a static function";
+        }
+        
+        public static string StaticWithArgFunction(int integer)
+        {
+            return $"this is a static function with argument: {integer}";
+        }
+
         [ContextMenu("Test")]
         public void DebugFunctions()
         {
@@ -40,6 +51,7 @@ namespace SerializableCallback.Samples
             Debug.Log($"_parameterCallbackInherit: {_parameterCallbackInherit.Invoke(5)}");
             Debug.Log($"_nonValueParameter: {_nonValueParameter.Invoke(default)}");
             Debug.Log($"_staticCallback: {_staticCallback.Invoke()}");
+            Debug.Log($"_staticWithArgCallback: {_staticWithArgCallback.Invoke(45)}");
         }
     }
 }

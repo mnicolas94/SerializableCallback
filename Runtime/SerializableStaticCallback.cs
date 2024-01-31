@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 namespace SerializableCallback
 {
@@ -8,53 +7,73 @@ namespace SerializableCallback
     {
         public virtual TReturn Invoke()
         {
-            if (func == null || !_isStatic) Cache(null);
-            InvokableStaticCallback<TReturn> call = func as InvokableStaticCallback<TReturn>;
-            return call.Invoke();
+            if (func == null) Cache(null);
+            
+            if (_dynamic)
+            {
+                InvokableStaticCallback<TReturn> call = func as InvokableStaticCallback<TReturn>;
+                return call.Invoke();
+            }
+            else
+            {
+                return func.Invoke(Args);
+            }
         }
 
         protected override void Cache(params object[] args)
         {
-            _isStatic = targetType.GetMethod(methodName).IsStatic;
-            ///! with no argument it HAS to be static.
-            func = new InvokableStaticCallback<TReturn>(targetType, methodName);
+            if (_targetType == null || _targetType.Type == null || string.IsNullOrEmpty(_methodName))
+            {
+                func = new InvokableStaticCallback<TReturn>(null, null);
+            }
+            else
+            {
+                if (_dynamic)
+                {
+                    func = new InvokableStaticCallback<TReturn>(targetType, methodName);
+                }
+                else
+                {
+                    func = GetPersistentMethod();
+                }
+            }
         }
     }
-
 
     [Serializable]
     public class SerializableStaticCallback<T0, TReturn> : SerializableStaticCallbackBase<TReturn>
     {
         public virtual TReturn Invoke(T0 arg0)
         {
-            if (func == null || !_isStatic) Cache(arg0);
-            if (isStatic)
+            if (func == null) Cache(arg0);
+            
+            if (_dynamic)
             {
                 InvokableStaticCallback<T0, TReturn> call = func as InvokableStaticCallback<T0, TReturn>;
-                //Debug.Log("this is a static class");
                 return call.Invoke(arg0);
             }
             else
             {
-                InvokableStaticCallback<TReturn> call = func as InvokableStaticCallback<TReturn>;
-                //Debug.Log("this is a instance");
-                return call.Invoke();
+                return func.Invoke(Args);
             }
         }
 
         protected override void Cache(params object[] args)
         {
-            _isStatic = targetType.GetMethod(methodName).IsStatic;
-            if (isStatic)
+            if (_targetType == null || _targetType.Type == null || string.IsNullOrEmpty(_methodName))
             {
-                func = new InvokableStaticCallback<T0, TReturn>(targetType, methodName);
-                //Debug.Log("this is a static class");
-            } 
+                func = new InvokableCallback<T0, TReturn>(null, null);
+            }
             else
             {
-                Debug.Log($" {methodName} is {_isStatic} and prefering instance {args[0]}");
-                func = new InvokableStaticCallback<TReturn>(args[0], methodName);
-                //Debug.Log("this is a instance class");
+                if (_dynamic)
+                {
+                    func = new InvokableStaticCallback<T0, TReturn>(targetType, methodName);
+                }
+                else
+                {
+                    func = GetPersistentMethod();
+                }
             }
         }
     }
@@ -64,33 +83,35 @@ namespace SerializableCallback
     {
         public virtual TReturn Invoke(T0 arg0,T1 arg1)
         {
-            if (func == null || !_isStatic) Cache(arg0,arg1);
-            if (isStatic)
+            if (func == null) Cache(arg0,arg1);
+            
+            if (_dynamic)
             {
                 InvokableStaticCallback<T0, T1, TReturn> call = func as InvokableStaticCallback<T0, T1, TReturn>;
-                //Debug.Log("this is a static class");
                 return call.Invoke(arg0,arg1);
             }
             else
             {
-                InvokableStaticCallback<T1, TReturn> call = func as InvokableStaticCallback<T1, TReturn>;
-                //Debug.Log("this is a instance");
-                return call.Invoke(arg1);
+                return func.Invoke(Args);
             }
         }
 
         protected override void Cache(params object[] args)
         {
-            _isStatic = targetType.GetMethod(methodName).IsStatic;
-            if (isStatic)
+            if (_targetType == null || _targetType.Type == null || string.IsNullOrEmpty(_methodName))
             {
-                func = new InvokableStaticCallback<T0, T1, TReturn>(targetType, methodName);
-                //Debug.Log("this is a static class");
+                func = new InvokableCallback<T0, T1, TReturn>(null, null);
             }
             else
             {
-                func = new InvokableStaticCallback<T1, TReturn>(args[0], methodName);
-                //Debug.Log("this is a instance class");
+                if (_dynamic)
+                {
+                    func = new InvokableStaticCallback<T0, T1, TReturn>(targetType, methodName);
+                }
+                else
+                {
+                    func = GetPersistentMethod();
+                }
             }
         }
     }
@@ -100,33 +121,35 @@ namespace SerializableCallback
     {
         public virtual TReturn Invoke(T0 arg0, T1 arg1, T2 arg2)
         {
-            if (func == null || !_isStatic) Cache(arg0,arg1,arg2);
-            if (isStatic)
+            if (func == null) Cache(arg0,arg1,arg2);
+            
+            if (_dynamic)
             {
                 InvokableStaticCallback<T0, T1, T2, TReturn> call = func as InvokableStaticCallback<T0, T1, T2, TReturn>;
-                //Debug.Log("this is a static class");
                 return call.Invoke(arg0, arg1, arg2);
             }
             else
             {
-                InvokableStaticCallback<T1, T2, TReturn> call = func as InvokableStaticCallback<T1, T2, TReturn>;
-                //Debug.Log("this is a instance");
-                return call.Invoke(arg1, arg2);
+                return func.Invoke(Args);
             }
         }
 
         protected override void Cache(params object[] args)
         {
-            _isStatic = targetType.GetMethod(methodName).IsStatic; 
-            if (isStatic)
+            if (_targetType == null || _targetType.Type == null || string.IsNullOrEmpty(_methodName))
             {
-                func = new InvokableStaticCallback<T0, T1, T2, TReturn>(targetType, methodName);
-                //Debug.Log("this is a static class");
+                func = new InvokableCallback<T0, T1, T2, TReturn>(null, null);
             }
             else
             {
-                func = new InvokableStaticCallback<T1, T2, TReturn>(args[0], methodName);
-                //Debug.Log("this is a instance class");
+                if (_dynamic)
+                {
+                    func = new InvokableStaticCallback<T0, T1, T2, TReturn>(targetType, methodName);
+                }
+                else
+                {
+                    func = GetPersistentMethod();
+                }
             }
         }
     }
@@ -136,33 +159,35 @@ namespace SerializableCallback
     {
         public virtual TReturn Invoke(T0 arg0, T1 arg1, T2 arg2, T3 arg3)
         {
-            if (func == null || !_isStatic) Cache(arg0, arg1, arg2, arg3);
-            if (isStatic)
+            if (func == null) Cache(arg0,arg1,arg2);
+            
+            if (_dynamic)
             {
                 InvokableStaticCallback<T0, T1, T2, T3, TReturn> call = func as InvokableStaticCallback<T0, T1, T2, T3, TReturn>;
-                //Debug.Log("this is a static class");
                 return call.Invoke(arg0, arg1, arg2, arg3);
             }
             else
             {
-                InvokableStaticCallback<T1, T2, T3, TReturn> call = func as InvokableStaticCallback<T1, T2, T3, TReturn>;
-                //Debug.Log("this is a instance");
-                return call.Invoke(arg1, arg2, arg3);
+                return func.Invoke(Args);
             }
         }
 
         protected override void Cache(params object[] args)
         {
-            _isStatic = targetType.GetMethod(methodName).IsStatic;
-            if (isStatic)
+            if (_targetType == null || _targetType.Type == null || string.IsNullOrEmpty(_methodName))
             {
-                func = new InvokableStaticCallback<T0, T1, T2, T3, TReturn>(targetType, methodName);
-                //Debug.Log("this is a static class");
+                func = new InvokableCallback<T0, T1, T2, T3, TReturn>(null, null);
             }
             else
             {
-                func = new InvokableStaticCallback<T1, T2, T3, TReturn>(args[0], methodName);
-                //Debug.Log("this is a instance class");
+                if (_dynamic)
+                {
+                    func = new InvokableStaticCallback<T0, T1, T2, T3, TReturn>(targetType, methodName);
+                }
+                else
+                {
+                    func = GetPersistentMethod();
+                }
             }
         }
     }
