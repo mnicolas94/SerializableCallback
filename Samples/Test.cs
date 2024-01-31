@@ -15,6 +15,7 @@ namespace SerializableCallback.Samples
         [SerializeField] private ParamCallback _parameterCallbackInherit;
         [SerializeField] private SerializableCallback<CancellationToken, string> _nonValueParameter;
         [SerializeField] private SerializableValueCallback<string> _valueCallback;
+        [SerializeField] private SerializableStaticCallback<string> _staticCallback;
 
         public float FloatFunction()
         {
@@ -38,6 +39,7 @@ namespace SerializableCallback.Samples
             Debug.Log($"_parameterCallback: {_parameterCallback.Invoke(5)}");
             Debug.Log($"_parameterCallbackInherit: {_parameterCallbackInherit.Invoke(5)}");
             Debug.Log($"_nonValueParameter: {_nonValueParameter.Invoke(default)}");
+            Debug.Log($"_staticCallback: {_staticCallback.Invoke()}");
         }
     }
 }

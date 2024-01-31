@@ -1,11 +1,8 @@
 using System;
-using System.Linq.Expressions;
-using System.Reflection;
-using UnityEngine;
 
 namespace SerializableCallback
 {
-	[System.Serializable]
+	[Serializable]
 	public class SerializableCallback<TReturn> : SerializableCallbackBase<TReturn> {
 		public TReturn Invoke() {
 			if (func == null) Cache();
