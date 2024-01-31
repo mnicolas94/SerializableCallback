@@ -96,6 +96,19 @@ namespace SerializableCallback
             _args = args;
             ClearCache();
         }
+        
+        public static SerializableStaticCallbackBase FromAction(Action action)
+        {
+            Type genericType = typeof(SerializableStaticCallback<>).MakeGenericType(typeof(void));
+            var callback = Activator.CreateInstance(genericType) as SerializableStaticCallbackBase;
+
+            callback._targetType = new SerializableMonoScript
+            {
+                Type = action.Method.DeclaringType
+            };
+            callback.SetMethod(action.Method.Name, false);
+            return callback;
+        }
 
         protected abstract void Cache(params object[] args);
 

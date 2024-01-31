@@ -86,6 +86,20 @@ namespace SerializableCallback
 			_args = args;
 			ClearCache();
 		}
+		
+		public static SerializableCallbackBase FromAction(Action action)
+		{
+			if (action.Target is not Object actionTarget)
+			{
+				return null;
+			}
+
+			Type genericType = typeof(SerializableCallback<>).MakeGenericType(typeof(void));
+			var callback = Activator.CreateInstance(genericType) as SerializableCallbackBase;
+			
+			callback.SetMethod(actionTarget, action.Method.Name, false);
+			return callback;
+		}
 
 		protected abstract void Cache();
 
