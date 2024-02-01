@@ -39,7 +39,8 @@ namespace SerializableCallback
 					throw new ArgumentException(types.Length + "args");
 			}
 
-			return Activator.CreateInstance(genericType, new { target, methodName }) as InvokableCallbackBase<TReturn>;
+			var constructorArguments = new object[] { target, methodName };
+			return Activator.CreateInstance(genericType, constructorArguments) as InvokableCallbackBase<TReturn>;
 		}
 	}
 
