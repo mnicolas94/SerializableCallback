@@ -2,127 +2,133 @@
 
 namespace SerializableCallback
 {
-	public class InvokableCallback<TReturn> : InvokableCallbackBase<TReturn> {
+    public class InvokableCallback<TReturn> : InvokableCallbackBase<Func<TReturn>, TReturn>
+    {
+        public InvokableCallback(object target, string methodName) : base(target, methodName)
+        {
+        }
 
-		public Func<TReturn> func;
+        public InvokableCallback(Type targetType, string methodName) : base(targetType, methodName)
+        {
+        }
 
-		public TReturn Invoke() {
-			return func();
-		}
+        public override TReturn Invoke(params object[] args)
+        {
+            return _function();
+        }
+        
+        public TReturn Invoke()
+        {
+            return _function();
+        }
 
-		public override TReturn Invoke(params object[] args) {
-			return func();
-		}
+        protected override Func<TReturn> GetDefaultFunction()
+        {
+            return () => default;
+        }
+    }
 
-		/// <summary> Constructor </summary>
-		public InvokableCallback(object target, string methodName) {
-			if (target == null || string.IsNullOrEmpty(methodName)) {
-				func = () => default(TReturn);
-			} else {
-				func = (System.Func<TReturn>) System.Delegate.CreateDelegate(typeof(System.Func<TReturn>), target, methodName);
-			}
-		}
-	}
+    public class InvokableCallback<T0, TReturn> : InvokableCallbackBase<Func<T0, TReturn>, TReturn>
+    {
+        public InvokableCallback(object target, string methodName) : base(target, methodName)
+        {
+        }
 
-	public class InvokableCallback<T0, TReturn> : InvokableCallbackBase<TReturn> {
+        public InvokableCallback(Type targetType, string methodName) : base(targetType, methodName)
+        {
+        }
 
-		public Func<T0, TReturn> func;
+        public override TReturn Invoke(params object[] args)
+        {
+            return _function((T0) args[0]);
+        }
+        
+        public TReturn Invoke(T0 arg0)
+        {
+            return _function(arg0);
+        }
 
-		public TReturn Invoke(T0 arg0) {
-			return func(arg0);
-		}
+        protected override Func<T0, TReturn> GetDefaultFunction()
+        {
+            return x => default;
+        }
+    }
 
-		public override TReturn Invoke(params object[] args) {
-			// Convert from special "unity-nulls" to true null
-			if (args[0] is UnityEngine.Object && (UnityEngine.Object) args[0] == null) args[0] = null;
-			return func((T0) args[0]);
-		}
+    public class InvokableCallback<T0, T1, TReturn> : InvokableCallbackBase<Func<T0, T1, TReturn>, TReturn>
+    {
+        public InvokableCallback(object target, string methodName) : base(target, methodName)
+        {
+        }
 
-		/// <summary> Constructor </summary>
-		public InvokableCallback(object target, string methodName) {
-			if (target == null || string.IsNullOrEmpty(methodName)) {
-				func = x => default(TReturn);
-			} else {
-				func = (System.Func<T0, TReturn>) System.Delegate.CreateDelegate(typeof(System.Func<T0, TReturn>), target, methodName);
-			}
-		}
-	}
+        public InvokableCallback(Type targetType, string methodName) : base(targetType, methodName)
+        {
+        }
 
-	public class InvokableCallback<T0, T1, TReturn> : InvokableCallbackBase<TReturn> {
+        public override TReturn Invoke(params object[] args)
+        {
+            return _function((T0) args[0], (T1) args[1]);
+        }
+        
+        public TReturn Invoke(T0 arg0, T1 arg1)
+        {
+            return _function(arg0, arg1);
+        }
 
-		public Func<T0, T1, TReturn> func;
+        protected override Func<T0, T1, TReturn> GetDefaultFunction()
+        {
+            return (x, y) => default;
+        }
+    }
 
-		public TReturn Invoke(T0 arg0, T1 arg1) {
-			return func(arg0, arg1);
-		}
+    public class InvokableCallback<T0, T1, T2, TReturn> : InvokableCallbackBase<Func<T0, T1, T2, TReturn>, TReturn>
+    {
+        public InvokableCallback(object target, string methodName) : base(target, methodName)
+        {
+        }
 
-		public override TReturn Invoke(params object[] args) {
-			// Convert from special "unity-nulls" to true null
-			if (args[0] is UnityEngine.Object && (UnityEngine.Object) args[0] == null) args[0] = null;
-			if (args[1] is UnityEngine.Object && (UnityEngine.Object) args[1] == null) args[1] = null;
-			return func((T0) args[0], (T1) args[1]);
-		}
+        public InvokableCallback(Type targetType, string methodName) : base(targetType, methodName)
+        {
+        }
 
-		/// <summary> Constructor </summary>
-		public InvokableCallback(object target, string methodName) {
-			if (target == null || string.IsNullOrEmpty(methodName)) {
-				func = (x, y) => default(TReturn);
-			} else {
-				func = (System.Func<T0, T1, TReturn>) System.Delegate.CreateDelegate(typeof(System.Func<T0, T1, TReturn>), target, methodName);
-			}
-		}
-	}
+        public override TReturn Invoke(params object[] args)
+        {
+            return _function((T0) args[0], (T1) args[1], (T2) args[2]);
+        }
+        
+        public TReturn Invoke(T0 arg0, T1 arg1, T2 arg2)
+        {
+            return _function(arg0, arg1, arg2);
+        }
 
-	public class InvokableCallback<T0, T1, T2, TReturn> : InvokableCallbackBase<TReturn> {
+        protected override Func<T0, T1, T2, TReturn> GetDefaultFunction()
+        {
+            return (x, y, z) => default;
+        }
+    }
 
-		public Func<T0, T1, T2, TReturn> func;
+    public class InvokableCallback<T0, T1, T2, T3, TReturn> : InvokableCallbackBase<Func<T0, T1, T2, T3, TReturn>, TReturn>
+    {
+        public InvokableCallback(object target, string methodName) : base(target, methodName)
+        {
+        }
 
-		public TReturn Invoke(T0 arg0, T1 arg1, T2 arg2) {
-			return func(arg0, arg1, arg2);
-		}
+        public InvokableCallback(Type targetType, string methodName) : base(targetType, methodName)
+        {
+        }
 
-		public override TReturn Invoke(params object[] args) {
-			// Convert from special "unity-nulls" to true null
-			if (args[0] is UnityEngine.Object && (UnityEngine.Object) args[0] == null) args[0] = null;
-			if (args[1] is UnityEngine.Object && (UnityEngine.Object) args[1] == null) args[1] = null;
-			if (args[2] is UnityEngine.Object && (UnityEngine.Object) args[2] == null) args[2] = null;
-			return func((T0) args[0], (T1) args[1], (T2) args[2]);
-		}
+        public override TReturn Invoke(params object[] args)
+        {
+            return _function((T0) args[0], (T1) args[1], (T2) args[2], (T3) args[3]);
+        }
+        
+        public TReturn Invoke(T0 arg0, T1 arg1, T2 arg2, T3 arg3)
+        {
+            return _function(arg0, arg1, arg2, arg3);
+        }
 
-		/// <summary> Constructor </summary>
-		public InvokableCallback(object target, string methodName) {
-			if (target == null || string.IsNullOrEmpty(methodName)) {
-				func = (x, y, z) => default(TReturn);
-			} else {
-				func = (System.Func<T0, T1, T2, TReturn>) System.Delegate.CreateDelegate(typeof(System.Func<T0, T1, T2, TReturn>), target, methodName);
-			}
-		}
-	}
-
-	public class InvokableCallback<T0, T1, T2, T3, TReturn> : InvokableCallbackBase<TReturn> {
-
-		public Func<T0, T1, T2, T3, TReturn> func;
-
-		public TReturn Invoke(T0 arg0, T1 arg1, T2 arg2, T3 arg3) {
-			return func(arg0, arg1, arg2, arg3);
-		}
-
-		public override TReturn Invoke(params object[] args) {
-			// Convert from special "unity-nulls" to true null
-			if (args[0] is UnityEngine.Object && (UnityEngine.Object) args[0] == null) args[0] = null;
-			if (args[1] is UnityEngine.Object && (UnityEngine.Object) args[1] == null) args[1] = null;
-			if (args[2] is UnityEngine.Object && (UnityEngine.Object) args[2] == null) args[2] = null;
-			if (args[3] is UnityEngine.Object && (UnityEngine.Object) args[3] == null) args[3] = null;
-			return func((T0) args[0], (T1) args[1], (T2) args[2], (T3) args[3]);
-		}
-
-		/// <summary> Constructor </summary>
-		public InvokableCallback(object target, string methodName) {
-			if (target == null || string.IsNullOrEmpty(methodName)) {
-				func = (x, y, z, w) => default(TReturn);
-			} else {
-				func = (System.Func<T0, T1, T2, T3, TReturn>) System.Delegate.CreateDelegate(typeof(System.Func<T0, T1, T2, T3, TReturn>), target, methodName);
-			}
-		}
-	}
+        protected override Func<T0, T1, T2, T3, TReturn> GetDefaultFunction()
+        {
+            return (x, y, z, w) => default;
+        }
+    }
 }

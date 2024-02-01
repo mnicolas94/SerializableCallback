@@ -38,7 +38,8 @@ namespace SerializableCallback
 				default:
 					throw new ArgumentException(types.Length + "args");
 			}
-			return Activator.CreateInstance(genericType, new object[] { target, methodName }) as InvokableCallbackBase<TReturn>;
+
+			return Activator.CreateInstance(genericType, new { target, methodName }) as InvokableCallbackBase<TReturn>;
 		}
 	}
 
@@ -113,69 +114,6 @@ namespace SerializableCallback
 #if UNITY_EDITOR
 			_typeName = base.GetType().AssemblyQualifiedName;
 #endif
-		}
-	}
-
-	[System.Serializable]
-	public struct Arg {
-		public enum ArgType { Unsupported, Bool, Int, Float, String, Object }
-		public bool boolValue;
-		public int intValue;
-		public float floatValue;
-		public string stringValue;
-		public Object objectValue;
-		public ArgType argType;
-		public string _typeName;
-
-		public object GetValue() {
-			return GetValue(argType);
-		}
-
-		public object GetValue(ArgType type) {
-			switch (type) {
-				case ArgType.Bool:
-					return boolValue;
-				case ArgType.Int:
-					return intValue;
-				case ArgType.Float:
-					return floatValue;
-				case ArgType.String:
-					return stringValue;
-				case ArgType.Object:
-					return objectValue;
-				default:
-					return null;
-			}
-		}
-
-		public static Type RealType(ArgType type) {
-			switch (type) {
-				case ArgType.Bool:
-					return typeof(bool);
-				case ArgType.Int:
-					return typeof(int);
-				case ArgType.Float:
-					return typeof(float);
-				case ArgType.String:
-					return typeof(string);
-				case ArgType.Object:
-					return typeof(Object);
-				default:
-					return null;
-			}
-		}
-
-		public static ArgType FromRealType(Type type) {
-			if (type == typeof(bool)) return ArgType.Bool;
-			else if (type == typeof(int)) return ArgType.Int;
-			else if (type == typeof(float)) return ArgType.Float;
-			else if (type == typeof(String)) return ArgType.String;
-			else if (typeof(Object).IsAssignableFrom(type)) return ArgType.Object;
-			else return ArgType.Unsupported;
-		}
-
-		public static bool IsSupported(Type type) {
-			return FromRealType(type) != ArgType.Unsupported;
 		}
 	}
 }
