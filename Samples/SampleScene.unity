@@ -249,7 +249,6 @@ MonoBehaviour:
     _target: {fileID: 1700258548}
     _targetTypeName: SerializableCallback.Samples.Test, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-    _targetTypeMonoScriptGuid: 
     _methodName: FloatFunction
     _args: []
     _dynamic: 0
@@ -260,8 +259,8 @@ MonoBehaviour:
   _parameterCallback:
     _isStatic: 0
     _target: {fileID: 1700258548}
-    _targetTypeName: 
-    _targetTypeMonoScriptGuid: 
+    _targetTypeName: SerializableCallback.Samples.Test, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
     _methodName: ParamFunction
     _args:
     - boolValue: 0
@@ -280,8 +279,8 @@ MonoBehaviour:
   _parameterCallbackInherit:
     _isStatic: 0
     _target: {fileID: 1700258548}
-    _targetTypeName: 
-    _targetTypeMonoScriptGuid: 
+    _targetTypeName: SerializableCallback.Samples.Test, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
     _methodName: ParamFunction
     _args:
     - boolValue: 0
@@ -298,8 +297,8 @@ MonoBehaviour:
   _nonValueParameter:
     _isStatic: 0
     _target: {fileID: 1700258548}
-    _targetTypeName: 
-    _targetTypeMonoScriptGuid: 
+    _targetTypeName: SerializableCallback.Samples.Test, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
     _methodName: NonValueFunction
     _args:
     - boolValue: 0
@@ -318,14 +317,13 @@ MonoBehaviour:
     dirty: 0
   _valueCallback:
     _mode: 1
-    _value: 1234
+    _value: qwdfasv34t13254reqwfadsc
     _callback:
       _isStatic: 0
       _target: {fileID: 1700258548}
       _targetTypeName: SerializableCallback.Samples.Test, Assembly-CSharp, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-      _targetTypeMonoScriptGuid: 
-      _methodName: get_name
+      _methodName: ToString
       _args: []
       _dynamic: 0
       _typeName: SerializableCallback.SerializableCallback`1[[System.String, mscorlib,
@@ -337,7 +335,6 @@ MonoBehaviour:
     _target: {fileID: 11500000, guid: db62a0a9178a84d4ab15ceb34d62ed39, type: 3}
     _targetTypeName: SerializableCallback.Samples.Test, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-    _targetTypeMonoScriptGuid: 
     _methodName: StaticFunction
     _args: []
     _dynamic: 0
@@ -350,7 +347,6 @@ MonoBehaviour:
     _target: {fileID: 11500000, guid: db62a0a9178a84d4ab15ceb34d62ed39, type: 3}
     _targetTypeName: SerializableCallback.Samples.Test, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-    _targetTypeMonoScriptGuid: 
     _methodName: StaticWithArgFunction
     _args:
     - boolValue: 0
