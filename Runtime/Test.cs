@@ -12,7 +12,7 @@ namespace SerializableCallback
 		public System.Func<float, bool> DynamicDelegate;
 		public Condition condition;
 		public SerializableEvent ev;
-
+		
 		void Start() {
 			RegularDelegate = TestMethod;
 			DynamicDelegate = (System.Func<float, bool>) System.Delegate.CreateDelegate(typeof(System.Func<float, bool>), this, "TestMethod");

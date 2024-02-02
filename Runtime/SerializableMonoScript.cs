@@ -127,7 +127,7 @@ namespace B83
                             m_FilterType = types[0];
                     }
                     else
-                        m_FilterType = typeof(UnityEngine.Object);
+                        m_FilterType = typeof(Object);
                 }
                 var typeName = property.FindPropertyRelative("m_TypeName");
                 System.Type type = System.Type.GetType(typeName.stringValue);

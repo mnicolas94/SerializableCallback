@@ -34,7 +34,7 @@ namespace SerializableCallback
 				default:
 					throw new ArgumentException(types.Length + "args");
 			}
-			return Activator.CreateInstance(genericType, new object[] { target, methodName }) as InvokableEventBase;
+			return Activator.CreateInstance(genericType, new object[] { Target, MethodName }) as InvokableEventBase;
 		}
 	}
 }

@@ -245,7 +245,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _floatCallback:
+    _isStatic: 0
     _target: {fileID: 1700258548}
+    _targetTypeName: SerializableCallback.Samples.Test, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    _targetTypeMonoScriptGuid: 
     _methodName: FloatFunction
     _args: []
     _dynamic: 0
@@ -254,7 +258,10 @@ MonoBehaviour:
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     dirty: 0
   _parameterCallback:
+    _isStatic: 0
     _target: {fileID: 1700258548}
+    _targetTypeName: 
+    _targetTypeMonoScriptGuid: 
     _methodName: ParamFunction
     _args:
     - boolValue: 0
@@ -271,7 +278,10 @@ MonoBehaviour:
       Siccity.SerializableCallback, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     dirty: 0
   _parameterCallbackInherit:
+    _isStatic: 0
     _target: {fileID: 1700258548}
+    _targetTypeName: 
+    _targetTypeMonoScriptGuid: 
     _methodName: ParamFunction
     _args:
     - boolValue: 0
@@ -286,7 +296,10 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
     dirty: 0
   _nonValueParameter:
+    _isStatic: 0
     _target: {fileID: 1700258548}
+    _targetTypeName: 
+    _targetTypeMonoScriptGuid: 
     _methodName: NonValueFunction
     _args:
     - boolValue: 0
@@ -307,8 +320,12 @@ MonoBehaviour:
     _mode: 1
     _value: 1234
     _callback:
-      _target: {fileID: 1700258547}
-      _methodName: get_tag
+      _isStatic: 0
+      _target: {fileID: 1700258548}
+      _targetTypeName: SerializableCallback.Samples.Test, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      _targetTypeMonoScriptGuid: 
+      _methodName: get_name
       _args: []
       _dynamic: 0
       _typeName: SerializableCallback.SerializableCallback`1[[System.String, mscorlib,
@@ -316,20 +333,24 @@ MonoBehaviour:
         Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
       dirty: 0
   _staticCallback:
-    _targetType:
-      m_TypeName: SerializableCallback.Samples.Test, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
+    _isStatic: 1
+    _target: {fileID: 11500000, guid: db62a0a9178a84d4ab15ceb34d62ed39, type: 3}
+    _targetTypeName: SerializableCallback.Samples.Test, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    _targetTypeMonoScriptGuid: 
     _methodName: StaticFunction
     _args: []
     _dynamic: 0
-    _typeName: SerializableCallback.SerializableStaticCallback`1[[System.String,
-      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],
-      Siccity.SerializableCallback, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _typeName: SerializableCallback.SerializableCallback`1[[System.String, mscorlib,
+      Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], Siccity.SerializableCallback,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     dirty: 0
   _staticWithArgCallback:
-    _targetType:
-      m_TypeName: SerializableCallback.Samples.Test, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
+    _isStatic: 1
+    _target: {fileID: 11500000, guid: db62a0a9178a84d4ab15ceb34d62ed39, type: 3}
+    _targetTypeName: SerializableCallback.Samples.Test, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    _targetTypeMonoScriptGuid: 
     _methodName: StaticWithArgFunction
     _args:
     - boolValue: 0
@@ -339,8 +360,8 @@ MonoBehaviour:
       objectValue: {fileID: 0}
       argType: 2
       _typeName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-    _dynamic: 0
-    _typeName: SerializableCallback.SerializableStaticCallback`2[[System.Int32, mscorlib,
+    _dynamic: 1
+    _typeName: SerializableCallback.SerializableCallback`2[[System.Int32, mscorlib,
       Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.String,
       mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],
       Siccity.SerializableCallback, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null

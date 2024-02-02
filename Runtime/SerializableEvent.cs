@@ -17,7 +17,7 @@
 				invokable = new InvokableEvent(null, null);
 			} else {
 				if (_dynamic) {
-					invokable = new InvokableEvent(target, methodName);
+					invokable = new InvokableEvent(Target, MethodName);
 				} else {
 					invokable = GetPersistentMethod();
 				}
@@ -42,7 +42,7 @@
 				invokable = new InvokableEvent<T0>(null, null);
 			} else {
 				if (_dynamic) {
-					invokable = new InvokableEvent<T0>(target, methodName);
+					invokable = new InvokableEvent<T0>(Target, MethodName);
 				} else {
 					invokable = GetPersistentMethod();
 				}
@@ -67,7 +67,7 @@
 				invokable = new InvokableEvent<T0, T1>(null, null);
 			} else {
 				if (_dynamic) {
-					invokable = new InvokableEvent<T0, T1>(target, methodName);
+					invokable = new InvokableEvent<T0, T1>(Target, MethodName);
 				} else {
 					invokable = GetPersistentMethod();
 				}
@@ -92,7 +92,7 @@
 				invokable = new InvokableEvent<T0, T1, T2>(null, null);
 			} else {
 				if (_dynamic) {
-					invokable = new InvokableEvent<T0, T1, T2>(target, methodName);
+					invokable = new InvokableEvent<T0, T1, T2>(Target, MethodName);
 				} else {
 					invokable = GetPersistentMethod();
 				}
@@ -117,7 +117,7 @@
 				invokable = new InvokableEvent<T0, T1, T2, T3>(null, null);
 			} else {
 				if (_dynamic) {
-					invokable = new InvokableEvent<T0, T1, T2, T3>(target, methodName);
+					invokable = new InvokableEvent<T0, T1, T2, T3>(Target, MethodName);
 				} else {
 					invokable = GetPersistentMethod();
 				}

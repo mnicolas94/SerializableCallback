@@ -48,10 +48,8 @@ namespace SerializableCallback
 
     /// <summary> An inspector-friendly serializable function </summary>
     [System.Serializable]
-
     public abstract class SerializableStaticCallbackBase : ISerializationCallbackReceiver
     {
-
         /// <summary> Target object </summary>
         public Type targetType { get { return _targetType.Type; } }
     

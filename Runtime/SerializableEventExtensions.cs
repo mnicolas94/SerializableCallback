@@ -9,7 +9,7 @@ namespace SerializableCallback
         #region 0 argument
         public static T SetCSharpAction<T>(this T @this, Action a) where T : SerializableEvent
         {
-            @this.dynamic = true;
+            @this.Dynamic = true;
             @this.ClearCache();
             var tmp = new InvokableEvent(null, "");
             tmp.action = a;
@@ -30,7 +30,7 @@ namespace SerializableCallback
         #region 1 argument
         public static T SetCSharpAction<T, U>(this T @this, Action<U> a) where T : SerializableEvent<U>
         {
-            @this.dynamic = true;
+            @this.Dynamic = true;
             @this.ClearCache();
             var tmp = new InvokableEvent<U>(null, "");
             tmp.action = a;
@@ -51,7 +51,7 @@ namespace SerializableCallback
         #region 2 argument
         public static T SetCSharpAction<T, U, V>(this T @this, Action<U,V> a) where T : SerializableEvent<U,V>
         {
-            @this.dynamic = true;
+            @this.Dynamic = true;
             @this.ClearCache();
             var tmp = new InvokableEvent<U,V>(null, "");
             tmp.action = a;
@@ -72,7 +72,7 @@ namespace SerializableCallback
         #region 3 argument
         public static T SetCSharpAction<T, U, V, W>(this T @this, Action<U,V,W> a) where T : SerializableEvent<U,V,W>
         {
-            @this.dynamic = true;
+            @this.Dynamic = true;
             @this.ClearCache();
             var tmp = new InvokableEvent<U,V,W>(null, "");
             tmp.action = a;

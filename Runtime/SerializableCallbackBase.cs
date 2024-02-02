@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using B83;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -39,31 +40,48 @@ namespace SerializableCallback
 					throw new ArgumentException(types.Length + "args");
 			}
 
-			var constructorArguments = new object[] { target, methodName };
+			object[] constructorArguments;
+			if (_isStatic)
+			{
+				constructorArguments = new object[] { TargetType, MethodName };	
+			}
+			else
+			{
+				constructorArguments = new object[] { Target, MethodName };
+			}
 			return Activator.CreateInstance(genericType, constructorArguments) as InvokableCallbackBase<TReturn>;
 		}
 	}
 
 	/// <summary> An inspector-friendly serializable function </summary>
-	[System.Serializable]
+	[Serializable]
 	public abstract class SerializableCallbackBase : ISerializationCallbackReceiver {
 
 		/// <summary> Target object </summary>
-		public Object target { get { return _target; } set { _target = value; ClearCache(); } }
+		public Object Target { get { return _target; } set { _target = value; ClearCache(); } }
+		public Type TargetType { get { return Type.GetType(_targetTypeName); } }
+		
 		/// <summary> Target method name </summary>
-		public string methodName { get { return _methodName; } set { _methodName = value; ClearCache(); } }
+		public string MethodName { get { return _methodName; } set { _methodName = value; ClearCache(); } }
 		public object[] Args { get { return args != null ? args : args = _args.Select(x => x.GetValue()).ToArray(); } }
 		public object[] args;
 		public Type[] ArgTypes { get { return argTypes != null ? argTypes : argTypes = _args.Select(x => Arg.RealType(x.argType)).ToArray(); } }
 		public Type[] argTypes;
 		public Type[] ArgRealTypes { get { return argRealTypes != null ? argRealTypes : argRealTypes = _args.Select(x => Type.GetType(x._typeName)).ToArray(); } }
 		public Type[] argRealTypes;
-		public bool dynamic { get { return _dynamic; } set { _dynamic = value; ClearCache(); } }
+		public bool Dynamic { get { return _dynamic; } set { _dynamic = value; ClearCache(); } }
 
+		// Target
+		[SerializeField] protected bool _isStatic;
 		[SerializeField] protected Object _target;
+		[SerializeField] protected string _targetTypeName;
+		[SerializeField] protected string _targetTypeMonoScriptGuid;
+		
+		// Method
 		[SerializeField] protected string _methodName;
 		[SerializeField] protected Arg[] _args;
 		[SerializeField] protected bool _dynamic;
+		
 #pragma warning disable 0414
 		[SerializeField] private string _typeName;
 #pragma warning restore 0414
@@ -72,7 +90,7 @@ namespace SerializableCallback
 
 #if UNITY_EDITOR
 		protected SerializableCallbackBase() {
-			_typeName = base.GetType().AssemblyQualifiedName;
+			_typeName = GetType().AssemblyQualifiedName;
 		}
 #endif
 
@@ -86,22 +104,38 @@ namespace SerializableCallback
 			_methodName = methodName;
 			_dynamic = dynamic;
 			_args = args;
+			_isStatic = false;
 			ClearCache();
 		}
 		
+		public void SetStaticMethod(Type targetType, string methodName, bool dynamic, params Arg[] args)
+		{
+			_targetTypeName = targetType.AssemblyQualifiedName;
+            _methodName = methodName;
+            _dynamic = dynamic;
+            _args = args;
+            _isStatic = true;
+            ClearCache();
+        }
+		
 		public static SerializableCallbackBase FromAction(Action action)
 		{
-			if (action.Target is not Object actionTarget)
-			{
-				return null;
-			}
-
-			Type genericType = typeof(SerializableCallback<>).MakeGenericType(typeof(void));
-			var callback = Activator.CreateInstance(genericType) as SerializableCallbackBase;
+			var callback = new SerializableCallback<object>();
+			var actionMethod = action.Method;
+			var isStatic = actionMethod.IsStatic;
 			
-			callback.SetMethod(actionTarget, action.Method.Name, false);
+			if (isStatic)
+			{
+				callback.SetStaticMethod(actionMethod.DeclaringType, actionMethod.Name, false);
+			}
+			else if (action.Target is Object actionTarget)
+			{
+				callback.SetMethod(actionTarget, actionMethod.Name, false);
+			}
+			
 			return callback;
 		}
+		
 
 		protected abstract void Cache();
 
