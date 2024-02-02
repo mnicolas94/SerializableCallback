@@ -60,18 +60,12 @@ namespace SerializableCallback.Editor
                 var indent = EditorGUI.indentLevel;
                 EditorGUI.indentLevel++;
 
-                // Set whether is static
+                // Set target type name
                 var isStatic = target is MonoScript;
                 var monoScript = target as MonoScript;
-                var isStaticProperty = property.FindPropertyRelative("_isStatic");
-                isStaticProperty.boolValue = isStatic;
-                
-                // Set target type (only if is static)
-                if (isStatic)
-                {
-                    var targetTypeNameProperty = property.FindPropertyRelative("_targetTypeName");
-                    targetTypeNameProperty.stringValue = monoScript.GetClass().AssemblyQualifiedName;
-                }
+                var targetType = isStatic ? monoScript.GetClass() : target.GetType();
+                var targetTypeNameProperty = property.FindPropertyRelative("_targetTypeName");
+                targetTypeNameProperty.stringValue = targetType.AssemblyQualifiedName;
                 
                 // Get method name
                 var methodProp = property.FindPropertyRelative("_methodName");
@@ -86,7 +80,6 @@ namespace SerializableCallback.Editor
                 var dynamic = dynamicProp.boolValue;
 
                 // Get active method
-                var targetType = isStatic ? monoScript.GetClass() : target.GetType();
                 var activeMethod = GetMethod(targetType, methodName, argTypes);
 
                 var methodlabel = new GUIContent("n/a");
@@ -407,6 +400,8 @@ namespace SerializableCallback.Editor
         {
             var targetProp = property.FindPropertyRelative("_target");
             targetProp.objectReferenceValue = target;
+            var isStaticProperty = property.FindPropertyRelative("_isStatic");
+            isStaticProperty.boolValue = methodInfo.IsStatic;
             var methodProp = property.FindPropertyRelative("_methodName");
             methodProp.stringValue = methodInfo.Name;
             var dynamicProp = property.FindPropertyRelative("_dynamic");

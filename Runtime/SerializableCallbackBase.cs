@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using B83;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -75,7 +74,6 @@ namespace SerializableCallback
 		[SerializeField] protected bool _isStatic;
 		[SerializeField] protected Object _target;
 		[SerializeField] protected string _targetTypeName;
-		[SerializeField] protected string _targetTypeMonoScriptGuid;
 		
 		// Method
 		[SerializeField] protected string _methodName;
