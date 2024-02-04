@@ -10,6 +10,12 @@ namespace SerializableCallback.Samples
 
     public class Test : MonoBehaviour
     {
+        [Header("Events")]
+        [SerializeField] private SerializableEvent _event;
+        [SerializeField] private SerializableEvent _staticEvent;
+        [SerializeField] private SerializableEvent<float> _floatEvent;
+        
+        [Header("Callbacks")]
         [SerializeField] private SerializableCallback<float> _floatCallback;
         [SerializeField] private SerializableCallback<int, float> _parameterCallback;
         [SerializeField] private ParamCallback _parameterCallbackInherit;
@@ -17,6 +23,21 @@ namespace SerializableCallback.Samples
         [SerializeField] private SerializableValueCallback<string> _valueCallback;
         [SerializeField] private SerializableCallback<string> _staticCallback;
         [SerializeField] private SerializableCallback<int, string> _staticWithArgCallback;
+
+        public void Event()
+        {
+            Debug.Log("Event call");
+        }
+        
+        public static void StaticEvent()
+        {
+            Debug.Log("Static event call");
+        }
+        
+        public void EventFloat(float f)
+        {
+            Debug.Log($"Event call with float: {f}");
+        }
 
         public float FloatFunction()
         {
@@ -46,6 +67,10 @@ namespace SerializableCallback.Samples
         [ContextMenu("Test")]
         public void DebugFunctions()
         {
+            _event.Invoke();
+            _staticEvent.Invoke();
+            _floatEvent.Invoke(42);
+            
             Debug.Log($"_floatCallback: {_floatCallback.Invoke()}");
             Debug.Log($"_parameterCallback: {_parameterCallback.Invoke(5)}");
             Debug.Log($"_parameterCallbackInherit: {_parameterCallbackInherit.Invoke(5)}");

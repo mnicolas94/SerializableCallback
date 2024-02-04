@@ -9,6 +9,35 @@ namespace SerializableCallback
 			base.ClearCache();
 			invokable = null;
 		}
+		
+		protected abstract Type GetInvokableType();
+		
+		protected override void Cache()
+		{
+			var invokableType = GetInvokableType();
+			if (_target == null || string.IsNullOrEmpty(_methodName))
+			{
+				invokable = Activator.CreateInstance(invokableType, new object[] { null, null }) as InvokableEventBase;
+			}
+			else
+			{
+				if (_dynamic)
+				{
+					if (_isStatic)
+					{
+						invokable = Activator.CreateInstance(invokableType, new object[] { TargetType, MethodName }) as InvokableEventBase;
+					}
+					else
+					{
+						invokable = Activator.CreateInstance(invokableType, new object[] { Target, MethodName }) as InvokableEventBase;
+					}
+				}
+				else
+				{
+					invokable = GetPersistentMethod();
+				}
+			}
+		}
 
 		protected InvokableEventBase GetPersistentMethod() {
 			Type[] types = new Type[ArgTypes.Length];
@@ -34,7 +63,17 @@ namespace SerializableCallback
 				default:
 					throw new ArgumentException(types.Length + "args");
 			}
-			return Activator.CreateInstance(genericType, new object[] { Target, MethodName }) as InvokableEventBase;
+
+			object[] constructorArguments;
+			if (_isStatic)
+			{
+				constructorArguments = new object[] { TargetType, MethodName };	
+			}
+			else
+			{
+				constructorArguments = new object[] { Target, MethodName };
+			}
+			return Activator.CreateInstance(genericType, constructorArguments) as InvokableEventBase;
 		}
 	}
 }

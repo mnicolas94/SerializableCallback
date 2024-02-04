@@ -12,7 +12,7 @@ namespace SerializableCallback
             @this.Dynamic = true;
             @this.ClearCache();
             var tmp = new InvokableEvent(null, "");
-            tmp.action = a;
+            tmp._action = a;
             @this.invokable = tmp;
             return @this;
         }
@@ -24,7 +24,7 @@ namespace SerializableCallback
         public static void AddListener<T>(this ICollection<T> @this, Action a) where T:SerializableEvent, new()
             => @this.Add(new T().SetCSharpAction(a));
         public static void RemoveListener<T>(this ICollection<T> @this, Action a) where T : SerializableEvent
-            => @this.Remove(@this.Where(i => (i.invokable as InvokableEvent).action == a).First());
+            => @this.Remove(@this.Where(i => (i.invokable as InvokableEvent)._action == a).First());
         #endregion
 
         #region 1 argument
@@ -33,7 +33,7 @@ namespace SerializableCallback
             @this.Dynamic = true;
             @this.ClearCache();
             var tmp = new InvokableEvent<U>(null, "");
-            tmp.action = a;
+            tmp._action = a;
             @this.invokable = tmp;
             return @this;
         }
@@ -45,7 +45,7 @@ namespace SerializableCallback
         public static void AddListener<T, U>(this ICollection<T> @this, Action<U> a) where T : SerializableEvent<U>, new()
             => @this.Add(new T().SetCSharpAction(a));
         public static void RemoveListener<T, U>(this ICollection<T> @this, Action<U> a) where T : SerializableEvent<U>
-            => @this.Remove(@this.Where(i => (i.invokable as InvokableEvent<U>).action == a).First());
+            => @this.Remove(@this.Where(i => (i.invokable as InvokableEvent<U>)._action == a).First());
         #endregion
 
         #region 2 argument
@@ -54,7 +54,7 @@ namespace SerializableCallback
             @this.Dynamic = true;
             @this.ClearCache();
             var tmp = new InvokableEvent<U,V>(null, "");
-            tmp.action = a;
+            tmp._action = a;
             @this.invokable = tmp;
             return @this;
         }
@@ -66,7 +66,7 @@ namespace SerializableCallback
         public static void AddListener<T, U, V>(this ICollection<T> @this, Action<U,V> a) where T : SerializableEvent<U,V>, new()
             => @this.Add(new T().SetCSharpAction(a));
         public static void RemoveListener<T, U, V>(this ICollection<T> @this, Action<U,V> a) where T : SerializableEvent<U,V>
-            => @this.Remove(@this.Where(i => (i.invokable as InvokableEvent<U,V>).action == a).First());
+            => @this.Remove(@this.Where(i => (i.invokable as InvokableEvent<U,V>)._action == a).First());
         #endregion
 
         #region 3 argument
@@ -75,7 +75,7 @@ namespace SerializableCallback
             @this.Dynamic = true;
             @this.ClearCache();
             var tmp = new InvokableEvent<U,V,W>(null, "");
-            tmp.action = a;
+            tmp._action = a;
             @this.invokable = tmp;
             return @this;
         }
@@ -87,7 +87,7 @@ namespace SerializableCallback
         public static void AddListener<T, U, V, W>(this ICollection<T> @this, Action<U, V, W> a) where T : SerializableEvent<U, V, W>, new()
             => @this.Add(new T().SetCSharpAction(a));
         public static void RemoveListener<T, U, V, W>(this ICollection<T> @this, Action<U, V, W> a) where T : SerializableEvent<U, V, W>
-            => @this.Remove(@this.Where(i => (i.invokable as InvokableEvent<U, V, W>).action == a).First());
+            => @this.Remove(@this.Where(i => (i.invokable as InvokableEvent<U, V, W>)._action == a).First());
         #endregion
     }
 }

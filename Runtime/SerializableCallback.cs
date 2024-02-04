@@ -19,30 +19,9 @@ namespace SerializableCallback
 			}
 		}
 
-		protected override void Cache()
+		protected override Type GetInvokableType()
 		{
-			if (_target == null || string.IsNullOrEmpty(_methodName))
-			{
-				func = new InvokableCallback<TReturn>(null, null);
-			}
-			else
-			{
-				if (_dynamic)
-				{
-					if (_isStatic)
-					{
-						func = new InvokableCallback<TReturn>(TargetType, MethodName);
-					}
-					else
-					{
-						func = new InvokableCallback<TReturn>(Target, MethodName);
-					}
-				}
-				else
-				{
-					func = GetPersistentMethod();
-				}
-			}
+			return typeof(InvokableCallback<TReturn>);
 		}
 	}
 
@@ -63,30 +42,9 @@ namespace SerializableCallback
 			}
 		}
 
-		protected override void Cache()
+		protected override Type GetInvokableType()
 		{
-			if (_target == null || string.IsNullOrEmpty(_methodName))
-			{
-				func = new InvokableCallback<T0, TReturn>(null, null);
-			}
-			else
-			{
-				if (_dynamic)
-				{
-					if (_isStatic)
-					{
-						func = new InvokableCallback<T0, TReturn>(TargetType, MethodName);
-					}
-					else
-					{
-						func = new InvokableCallback<T0, TReturn>(Target, MethodName);
-					}
-				}
-				else
-				{
-					func = GetPersistentMethod();
-				}
-			}
+			return typeof(InvokableCallback<T0, TReturn>);
 		}
 	}
 
@@ -107,30 +65,9 @@ namespace SerializableCallback
 			}
 		}
 
-		protected override void Cache()
+		protected override Type GetInvokableType()
 		{
-			if (_target == null || string.IsNullOrEmpty(_methodName))
-			{
-				func = new InvokableCallback<T0, T1, TReturn>(null, null);
-			}
-			else
-			{
-				if (_dynamic)
-				{
-					if (_isStatic)
-					{
-						func = new InvokableCallback<T0, T1, TReturn>(TargetType, MethodName);
-					}
-					else
-					{
-						func = new InvokableCallback<T0, T1, TReturn>(Target, MethodName);
-					}
-				}
-				else
-				{
-					func = GetPersistentMethod();
-				}
-			}
+			return typeof(InvokableCallback<T0, T1, TReturn>);
 		}
 	}
 
@@ -151,30 +88,9 @@ namespace SerializableCallback
 			}
 		}
 
-		protected override void Cache()
+		protected override Type GetInvokableType()
 		{
-			if (_target == null || string.IsNullOrEmpty(_methodName))
-			{
-				func = new InvokableCallback<T0, T1, T2, TReturn>(null, null);
-			}
-			else
-			{
-				if (_dynamic)
-				{
-					if (_isStatic)
-					{
-						func = new InvokableCallback<T0, T1, T2, TReturn>(TargetType, MethodName);
-					}
-					else
-					{
-						func = new InvokableCallback<T0, T1, T2, TReturn>(Target, MethodName);
-					}
-				}
-				else
-				{
-					func = GetPersistentMethod();
-				}
-			}
+			return typeof(InvokableCallback<T0, T1, T2, TReturn>);
 		}
 	}
 
@@ -195,30 +111,9 @@ namespace SerializableCallback
 			}
 		}
 
-		protected override void Cache()
+		protected override Type GetInvokableType()
 		{
-			if (_target == null || string.IsNullOrEmpty(_methodName))
-			{
-				func = new InvokableCallback<T0, T1, T2, T3, TReturn>(null, null);
-			}
-			else
-			{
-				if (_dynamic)
-				{
-					if (_isStatic)
-					{
-						func = new InvokableCallback<T0, T1, T2, T3, TReturn>(TargetType, MethodName);
-					}
-					else
-					{
-						func = new InvokableCallback<T0, T1, T2, T3, TReturn>(Target, MethodName);
-					}
-				}
-				else
-				{
-					func = GetPersistentMethod();
-				}
-			}
+			return typeof(InvokableCallback<T0, T1, T2, T3, TReturn>);
 		}
 	}
 }

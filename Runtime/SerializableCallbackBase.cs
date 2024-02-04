@@ -13,12 +13,41 @@ namespace SerializableCallback
 			func = null;
 		}
 
+		protected abstract Type GetInvokableType();
+		
+		protected override void Cache()
+		{
+			var invokableType = GetInvokableType();
+			if (_target == null || string.IsNullOrEmpty(_methodName))
+			{
+				func = Activator.CreateInstance(invokableType, new object[] { null, null }) as InvokableCallbackBase<TReturn>;
+			}
+			else
+			{
+				if (_dynamic)
+				{
+					if (_isStatic)
+					{
+						func = Activator.CreateInstance(invokableType, new object[] { TargetType, MethodName }) as InvokableCallbackBase<TReturn>;
+					}
+					else
+					{
+						func = Activator.CreateInstance(invokableType, new object[] { Target, MethodName }) as InvokableCallbackBase<TReturn>;
+					}
+				}
+				else
+				{
+					func = GetPersistentMethod();
+				}
+			}
+		}
+
 		protected InvokableCallbackBase<TReturn> GetPersistentMethod() {
 			Type[] types = new Type[ArgRealTypes.Length + 1];
 			Array.Copy(ArgRealTypes, types, ArgRealTypes.Length);
 			types[types.Length - 1] = typeof(TReturn);
 
-			Type genericType = null;
+			Type genericType;
 			switch (types.Length) {
 				case 1:
 					genericType = typeof(InvokableCallback<>).MakeGenericType(types);
