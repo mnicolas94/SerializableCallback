@@ -1,7 +1,7 @@
 {
   "name": "com.github.siccity.serializablecallback",
   "description": "UnityEvent and System.Func had a child. Lets you drag-and-drop methods with or without return values / parameters in the Unity inspector. It uses expression trees and reflection to cache a delegate on first execution. Usage is identical to UnityEvent",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "unity": "2020.1",
   "displayName": "SerializableCallback",
   "author": {
