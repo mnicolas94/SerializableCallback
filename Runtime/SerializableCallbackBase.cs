@@ -144,25 +144,6 @@ namespace SerializableCallback
             _isStatic = true;
             ClearCache();
         }
-		
-		public static SerializableCallbackBase FromAction(Action action)
-		{
-			var callback = new SerializableCallback<object>();
-			var actionMethod = action.Method;
-			var isStatic = actionMethod.IsStatic;
-			
-			if (isStatic)
-			{
-				callback.SetStaticMethod(actionMethod.DeclaringType, actionMethod.Name, false);
-			}
-			else if (action.Target is Object actionTarget)
-			{
-				callback.SetMethod(actionTarget, actionMethod.Name, false);
-			}
-			
-			return callback;
-		}
-		
 
 		protected abstract void Cache();
 

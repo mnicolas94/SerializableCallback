@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace SerializableCallback
 {
@@ -9,11 +11,15 @@ namespace SerializableCallback
         #region 0 argument
         public static T SetCSharpAction<T>(this T @this, Action a) where T : SerializableEvent
         {
-            @this.Dynamic = true;
-            @this.ClearCache();
-            var tmp = new InvokableEvent(null, "");
-            tmp._action = a;
-            @this.invokable = tmp;
+            var method = a.Method;
+            if (method.IsStatic)
+            {
+                @this.SetStaticMethod(method.DeclaringType, method.Name, true);
+            }
+            else
+            {
+                @this.SetMethod((Object) a.Target, method.Name, true);
+            }
             return @this;
         }
 
@@ -30,11 +36,15 @@ namespace SerializableCallback
         #region 1 argument
         public static T SetCSharpAction<T, U>(this T @this, Action<U> a) where T : SerializableEvent<U>
         {
-            @this.Dynamic = true;
-            @this.ClearCache();
-            var tmp = new InvokableEvent<U>(null, "");
-            tmp._action = a;
-            @this.invokable = tmp;
+            var method = a.Method;
+            if (method.IsStatic)
+            {
+                @this.SetStaticMethod(method.DeclaringType, method.Name, true);
+            }
+            else
+            {
+                @this.SetMethod((Object) a.Target, method.Name, true);
+            }
             return @this;
         }
 
@@ -51,11 +61,15 @@ namespace SerializableCallback
         #region 2 argument
         public static T SetCSharpAction<T, U, V>(this T @this, Action<U,V> a) where T : SerializableEvent<U,V>
         {
-            @this.Dynamic = true;
-            @this.ClearCache();
-            var tmp = new InvokableEvent<U,V>(null, "");
-            tmp._action = a;
-            @this.invokable = tmp;
+            var method = a.Method;
+            if (method.IsStatic)
+            {
+                @this.SetStaticMethod(method.DeclaringType, method.Name, true);
+            }
+            else
+            {
+                @this.SetMethod((Object) a.Target, method.Name, true);
+            }
             return @this;
         }
 
@@ -72,11 +86,15 @@ namespace SerializableCallback
         #region 3 argument
         public static T SetCSharpAction<T, U, V, W>(this T @this, Action<U,V,W> a) where T : SerializableEvent<U,V,W>
         {
-            @this.Dynamic = true;
-            @this.ClearCache();
-            var tmp = new InvokableEvent<U,V,W>(null, "");
-            tmp._action = a;
-            @this.invokable = tmp;
+            var method = a.Method;
+            if (method.IsStatic)
+            {
+                @this.SetStaticMethod(method.DeclaringType, method.Name, true);
+            }
+            else
+            {
+                @this.SetMethod((Object) a.Target, method.Name, true);
+            }
             return @this;
         }
 
