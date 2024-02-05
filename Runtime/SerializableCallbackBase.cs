@@ -18,7 +18,7 @@ namespace SerializableCallback
 		protected override void Cache()
 		{
 			var invokableType = GetInvokableType();
-			if (_target == null || string.IsNullOrEmpty(_methodName))
+			if ((_target == null && !_isStatic) || string.IsNullOrEmpty(_methodName))
 			{
 				func = Activator.CreateInstance(invokableType, new object[] { null, null }) as InvokableCallbackBase<TReturn>;
 			}
@@ -48,7 +48,8 @@ namespace SerializableCallback
 			types[types.Length - 1] = typeof(TReturn);
 
 			Type genericType;
-			switch (types.Length) {
+			switch (types.Length)
+			{
 				case 1:
 					genericType = typeof(InvokableCallback<>).MakeGenericType(types);
 					break;
@@ -56,13 +57,13 @@ namespace SerializableCallback
 					genericType = typeof(InvokableCallback<,>).MakeGenericType(types);
 					break;
 				case 3:
-					genericType = typeof(InvokableCallback<, ,>).MakeGenericType(types);
+					genericType = typeof(InvokableCallback<,,>).MakeGenericType(types);
 					break;
 				case 4:
-					genericType = typeof(InvokableCallback<, , ,>).MakeGenericType(types);
+					genericType = typeof(InvokableCallback<,,,>).MakeGenericType(types);
 					break;
 				case 5:
-					genericType = typeof(InvokableCallback<, , , ,>).MakeGenericType(types);
+					genericType = typeof(InvokableCallback<,,,,>).MakeGenericType(types);
 					break;
 				default:
 					throw new ArgumentException(types.Length + "args");
@@ -124,6 +125,20 @@ namespace SerializableCallback
 		public virtual void ClearCache() {
 			argTypes = null;
 			args = null;
+		}
+
+		public void SetMethod<T>(T function, bool dynamic, params Arg[] args) where T : Delegate
+		{
+			var method = function.Method;
+			
+			if (method.IsStatic)
+			{
+				SetStaticMethod(method.DeclaringType, method.Name, dynamic, args);
+			}
+			else
+			{
+				SetMethod((Object) function.Target, method.Name, dynamic, args);
+			}
 		}
 
 		public void SetMethod(Object target, string methodName, bool dynamic, params Arg[] args) {

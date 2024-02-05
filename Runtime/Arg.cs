@@ -35,6 +35,42 @@ namespace SerializableCallback
             }
         }
 
+        public void SetValue(object value)
+        {
+            var type = value.GetType();
+            var argumentType = FromRealType(type);
+            
+            _typeName = type.AssemblyQualifiedName;
+            argType = argumentType;
+            switch (argumentType) {
+                case ArgType.Bool:
+                    boolValue = (bool) value;
+                    break;
+                case ArgType.Int:
+                    intValue = (int) value;
+                    break;
+                case ArgType.Float:
+                    floatValue = (float) value;
+                    break;
+                case ArgType.String:
+                    stringValue = (string) value;
+                    break;
+                case ArgType.Object:
+                    objectValue = (Object) value;
+                    break;
+                case ArgType.Unsupported:
+                default:
+                    break;
+            }
+        }
+
+        public static Arg FromValue(object value)
+        {
+            var arg = new Arg();
+            arg.SetValue(value);
+            return arg;
+        }
+
         public static Type RealType(ArgType type) {
             switch (type) {
                 case ArgType.Bool:

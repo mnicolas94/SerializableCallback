@@ -15,7 +15,7 @@ namespace SerializableCallback
 		protected override void Cache()
 		{
 			var invokableType = GetInvokableType();
-			if (_target == null || string.IsNullOrEmpty(_methodName))
+			if ((_target == null && !_isStatic) || string.IsNullOrEmpty(_methodName))
 			{
 				invokable = Activator.CreateInstance(invokableType, new object[] { null, null }) as InvokableEventBase;
 			}
