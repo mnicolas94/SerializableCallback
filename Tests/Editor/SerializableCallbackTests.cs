@@ -73,6 +73,20 @@ namespace SerializableCallback.Tests.Editor
             // assert
             Assert.AreEqual(expected, result);
         }
+        
+        [Test]
+        public void When_InvokeCallbackWithNoMethod_ReturnsDefault()
+        {
+            // arrange
+            var callback = new SerializableCallback<string>();
+            string expected = default;
+            
+            // act
+            var result = callback.Invoke();
+
+            // assert
+            Assert.AreEqual(expected, result);
+        }
     }
 
     public class TestsCallbacksTarget : ScriptableObject

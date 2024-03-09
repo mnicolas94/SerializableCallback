@@ -21,6 +21,8 @@ namespace SerializableCallback
 			if ((_target == null && !_isStatic) || string.IsNullOrEmpty(_methodName))
 			{
 				func = Activator.CreateInstance(invokableType, new object[] { null, null }) as InvokableCallbackBase<TReturn>;
+				// set dynamic true to avoid calling methods when no arguments exist
+				_dynamic = true;
 			}
 			else
 			{
