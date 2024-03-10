@@ -40,8 +40,9 @@ namespace SerializableCallback
 		}
 
 		protected InvokableEventBase GetPersistentMethod() {
-			Type[] types = new Type[ArgTypes.Length];
-			Array.Copy(ArgTypes, types, ArgTypes.Length);
+			var argumentsLength = ArgRealTypes.Length;
+			Type[] types = new Type[argumentsLength];
+			Array.Copy(ArgRealTypes, types, argumentsLength);
 
 			Type genericType = null;
 			switch (types.Length) {

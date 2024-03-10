@@ -56,6 +56,20 @@ namespace SerializableCallback.Tests.Editor
             // Assert
             Assert.AreEqual(1, TestsEventsTarget.StaticCallCount);
         }
+        
+        [Test]
+        public void When_InvokeEventNonDynamycally_WithObjectChildTypeArgument_Then_DoNotThrowError() {
+
+            // Arrange
+            var evt = new SerializableEvent();
+            var target = ScriptableObject.CreateInstance<TestsEventsTarget>();
+            var argument = ScriptableObject.CreateInstance<TestsEventsTarget>();
+    
+            // Act and assert
+            var args = new Arg[]{Arg.FromValue(argument)};
+            evt.SetMethod<Action<TestsEventsTarget>>(target.MethodWithScriptableObjectArgument, false, args);
+            evt.Invoke();
+        }
     }
     
     public class TestsEventsTarget : ScriptableObject
@@ -77,6 +91,11 @@ namespace SerializableCallback.Tests.Editor
         public void OnEventWithArgsMethod(int arg1, string arg2)
         {
             OnEventWithArgs(arg1, arg2);
+        }
+
+        public void MethodWithScriptableObjectArgument(TestsEventsTarget argument)
+        {
+            
         }
     }
 }

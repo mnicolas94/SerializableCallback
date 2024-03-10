@@ -87,6 +87,20 @@ namespace SerializableCallback.Tests.Editor
             // assert
             Assert.AreEqual(expected, result);
         }
+        
+        [Test]
+        public void When_InvokeCallbackNonDynamycally_WithObjectChildTypeArgument_Then_DoNotThrowError() {
+
+            // Arrange
+            var callback = new SerializableCallback<bool>();
+            var target = ScriptableObject.CreateInstance<TestsCallbacksTarget>();
+            var argument = ScriptableObject.CreateInstance<TestsCallbacksTarget>();
+    
+            // Act and assert
+            var args = new Arg[]{Arg.FromValue(argument)};
+            callback.SetMethod<Func<TestsCallbacksTarget, bool>>(target.MethodWithScriptableObjectArgument, false, args);
+            callback.Invoke();
+        }
     }
 
     public class TestsCallbacksTarget : ScriptableObject
@@ -107,6 +121,11 @@ namespace SerializableCallback.Tests.Editor
         public static string StaticStringFunction()
         {
             return (string) ExpectedStaticResult;
+        }
+        
+        public bool MethodWithScriptableObjectArgument(TestsCallbacksTarget argument)
+        {
+            return true;
         }
     }
 }

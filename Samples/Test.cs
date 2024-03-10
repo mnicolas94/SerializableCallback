@@ -14,6 +14,7 @@ namespace SerializableCallback.Samples
         [SerializeField] private SerializableEvent _event;
         [SerializeField] private SerializableEvent _staticEvent;
         [SerializeField] private SerializableEvent<float> _floatEvent;
+        [SerializeField] private SerializableEvent<ScriptableObject> _scriptableObjectEvent;
         
         [Header("Callbacks")]
         [SerializeField] private SerializableCallback<float> _floatCallback;
@@ -32,6 +33,11 @@ namespace SerializableCallback.Samples
         public static void StaticEvent()
         {
             Debug.Log("Static event call");
+        }
+        
+        public void EventFloat()
+        {
+            Debug.Log($"Event call with function override");
         }
         
         public void EventFloat(float f)
@@ -67,10 +73,13 @@ namespace SerializableCallback.Samples
         [ContextMenu("Test")]
         public void DebugFunctions()
         {
+            // events
             _event.Invoke();
             _staticEvent.Invoke();
             _floatEvent.Invoke(42);
+            _scriptableObjectEvent.Invoke(ScriptableObject.CreateInstance<TestSO>());
             
+            // callbacks
             Debug.Log($"_floatCallback: {_floatCallback.Invoke()}");
             Debug.Log($"_parameterCallback: {_parameterCallback.Invoke(5)}");
             Debug.Log($"_parameterCallbackInherit: {_parameterCallbackInherit.Invoke(5)}");
